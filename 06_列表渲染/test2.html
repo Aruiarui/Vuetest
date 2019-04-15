@@ -1,18 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>06_列表渲染_过滤与排序</title>
 </head>
+
 <body>
-<!--
+  <!--
 1. 列表过滤
 2. 列表排序
 -->
+  <div id="demo">
+    <input type="text" v-model='searchName'>
+    <ul>
+      <li v-for="(infer, index) in filterInferList" :key="infer.id">
+        {{index}}--{{infer.id}}--{{infer.name}}--{{infer.age}}
+      </li>
+    </ul>
 
-<script type="text/javascript" src="../js/vue.js"></script>
-<script type="text/javascript">
+    <div>
+      <button @click='orderType=1'>年龄升序</button>
+      <button @click='orderType=2'>年龄降序</button>
+      <button @click='orderType=0'>原本顺序</button>
+    </div>
+  </div>
 
-</script>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#demo',
+      data: {
+        searchName: '',
+        orderType: 0, //0为原本顺序，1为升序，2为降序
+        inferList: [
+          { id: 1, name: 'liming', age: 18 },
+          { id: 2, name: 'hanmei', age: 19 },
+          { id: 3, name: 'linhua', age: 19 },
+          { id: 4, name: 'xyyang', age: 21 },
+          { id: 5, name: 'myyang', age: 23 },
+          { id: 6, name: 'lyyang', age: 17 },
+        ]
+      },
+      computed: {
+        filterInferList() {
+          const { searchName, inferList, orderType } = this
+          const arr = inferList.filter((infer, index) =>
+            infer.name.indexOf(searchName) !== -1
+          )
+          if (orderType !== 0) {
+            arr.sort((infer1, infer2) => { // 如果大于0, 将右边的换到左边去
+              if (orderType === 1) { // 升序
+                return infer1.age - infer2.age
+              } else { // 降序
+                return infer2.age - infer1.age
+              }
+            })
+          }
+
+
+          // 返回结果
+          return arr
+        }
+      }
+    })
+  </script>
 </body>
+
 </html>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>02_模板语法</title>
 </head>
+
 <body>
-<!--
+  <!--
 1. 模板的理解:
   动态的html页面
   包含了一些JS语法代码
@@ -29,14 +31,37 @@
     @click='xxx'
 -->
 
-<div id="app">
-  <h2>1. 双大括号表达式</h2>
+  <div id="app">
+    <h2>1. 双大括号表达式</h2>
+    <p>{{msg}}</p>
+    <p>{{msg.toUpperCase()}}</p>
 
-  <h2>2. 指令一: 强制数据绑定</h2>
+    <h2>2. 指令一: 强制数据绑定</h2>
+    <a href="url">访问硅谷官网</a>
+    <a v-bind:href="url">访问硅谷官网</a>
+    <a :href="url">访问硅谷官网</a>
 
-  <h2>3. 指令二: 绑定事件监听</h2>
+    <h2>3. 指令二: 绑定事件监听</h2>
+    <button v-on:click="Click">点击</button>
+    <button @click="Click">点击</button>
 
-</div>
+  </div>
 
 </body>
+<script src="../js/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      msg: 'today is a sunny day!',
+      url: 'http://www.atguigu.com'
+    },
+    methods: {
+      Click() {
+        alert('点击跳转')
+      }
+    }
+  })
+</script>
+
 </html>

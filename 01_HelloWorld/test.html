@@ -18,9 +18,31 @@
   5. 理解vue的mvvm实现
 -->
   <div id="test">
+
+    <!-- 添加单行 -->
     <input type="text" v-model="message">
     <p>hello,{{message}}</p>
 
+
+    <!-- textarea这代表添加多行 -->
+    <textarea v-model="message" placeholder="添加多行"></textarea><br>
+
+    <!-- checkbox单选，并且绑定为布尔值 -->
+    <input type="checkbox" id="checkbox" v-model="message">
+    <label for="checkbox">{{ message }}</label>
+  </div>
+
+  <div id="test2">
+    <input type="checkbox" id="red" value="red" v-model="checkedColor">
+    <label for="red">red</label>
+
+    <input type="checkbox" id="green" value="green" v-model="checkedColor">
+    <label for="green">green</label>
+
+    <input type="checkbox" id="pink" value="pink" v-model="checkedColor">
+    <label for="pink">pink</label>
+
+    <p>勾选的颜色是：{{checkedColor}}</p>
   </div>
 
 </body>
@@ -29,7 +51,14 @@
   new Vue({
     el: '#test',
     data: {
-      message: 'atguigu'
+      message: 'true'
+    }
+  })
+
+  new Vue({
+    el: '#test2',
+    data: {
+      checkedColor: []
     }
   })
 </script>

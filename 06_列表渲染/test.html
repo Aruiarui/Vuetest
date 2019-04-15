@@ -17,6 +17,13 @@
 
 <div id="demo">
   <h2>测试: v-for 遍历数组</h2>
+  <ul>
+    <li v-for="(infer, index) in inferList" :key="infer.id">
+      {{index}}--{{infer.id}}--{{infer.name}}--{{infer.age}}
+      --<button @click='deleteI(index)'>删除</button>
+      --<button @click="updateI(index,{id:Date.now(), name:'myyang', age:30})">更新</button>
+    </li>
+  </ul>
 
   <h2>测试: v-for 遍历对象</h2>
 
@@ -24,7 +31,28 @@
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el:'#demo',
+    data: {
+      inferList:[
+        {id:1, name:'liming', age:18},
+        {id:2, name:'hanmei', age:19},
+        {id:3, name:'linhua', age:19},
+        {id:4, name:'xyyang', age:21},
+        {id:5, name:'myyang', age:23},
+        {id:6, name:'lyyang', age:17},
+      ]
+    },
+    methods: {
+      deleteI(index) {
+        this.inferList.splice(index, 1)
+      },
 
+      updateI(index, newI) {
+        this.inferList.splice(index, 1, newI)
+      }
+    }
+  })
 </script>
 </body>
 </html>
